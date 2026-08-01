@@ -1,5 +1,5 @@
 const $ = s => document.querySelector(s); let cache = null;
-async function api(url, options = {}) { const r = await fetch(url, { ...options, headers: { 'Content-Type': 'application/json', ...(options.headers || {}) } }); const data = await r.json(); if (!r.ok) throw new Error(data.error || '请求失败'); return data; }
+async function api(url, options = {}) { const r = await fetch(url, { ...options, headers: { 'Content-Type': 'application/json', ...(options.headers || {}) } }); const raw = await r.text(); let data; try { data = raw ? JSON.parse(raw) : {}; } catch { throw new Error(`服务器返回 ${r.status}：${raw.slice(0, 120) || '无法解析的响应'}`); } if (!r.ok) throw new Error(data.error || '请求失败'); return data; }
 function msg(el, text, good = false) { el.textContent = text; el.className = `message ${good ? 'success' : ''}`; }
 function escapeHtml(t) { const d = document.createElement('div'); d.textContent = String(t); return d.innerHTML; }
 function duration(sec) { const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60); return h ? `${h}小时${m}分` : `${m}分钟`; }

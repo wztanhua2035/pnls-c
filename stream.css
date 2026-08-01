@@ -1,0 +1,24 @@
+.story-text.streaming {
+  white-space: pre-wrap;
+  text-indent: 2em;
+}
+
+.story-text.streaming::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: -0.12em;
+  background: var(--red);
+  animation: cursor-blink 0.8s steps(1) infinite;
+}
+
+.relation-empty {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}

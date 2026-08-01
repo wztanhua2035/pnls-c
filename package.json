@@ -1,6 +1,6 @@
 {
   "name": "ponan-longshe-mud",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "《坡南龙蛇》AI 武侠 MUD 游戏",
   "type": "module",
