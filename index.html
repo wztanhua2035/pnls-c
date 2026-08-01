@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#e9d8a6"><title>坡南龙蛇｜AI武侠MUD</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero"><img src="pnlsbanner.png" alt="坡南龙蛇 武侠MUD题头"><p>一梦入宋，龙蛇起陆。你的每一步，都由江湖实时回应。</p></header>
+
+    <section id="loginView" class="gate card">
+      <div class="seal">入</div><div><span class="eyebrow">PLAYER ENTRY</span><h1>踏入南宋江湖</h1><p class="muted">姓名与六位数密码共同识别你的个人存档。首次游玩请选择“重新开始”。</p></div>
+      <form id="loginForm" class="form-grid">
+        <label>男主角姓名<input id="playerName" maxlength="20" autocomplete="username" placeholder="例如：尚风" required></label>
+        <label>六位数密码<input id="playerPassword" type="password" inputmode="numeric" pattern="\d{6}" maxlength="6" autocomplete="current-password" placeholder="••••••" required></label>
+        <fieldset><legend>进入方式</legend><label class="radio"><input type="radio" name="mode" value="continue" checked> 继续游戏</label><label class="radio"><input type="radio" name="mode" value="restart"> 重新开始</label></fieldset>
+        <button class="primary" type="submit">进入江湖</button><p id="loginMessage" class="message" role="status"></p>
+      </form>
+      <a class="admin-link" href="/admin">管理后台</a>
+    </section>
+
+    <section id="gameView" class="game hidden" aria-live="polite">
+      <div class="game-top card"><div><span id="chapter" class="eyebrow"></span><h2 id="location"></h2><p id="time" class="muted"></p></div><div class="game-actions"><button id="saveBtn" class="secondary">保存进度</button><button id="quitBtn" class="ghost">退出游戏</button></div></div>
+      <div class="game-layout">
+        <aside class="sidebar">
+          <section class="card compact"><h3>人物状态</h3><dl><div><dt>姓名</dt><dd id="statName"></dd></div><div><dt>回合</dt><dd id="statTurn"></dd></div><div><dt>状态</dt><dd id="statHp"></dd></div></dl></section>
+          <section class="card compact"><h3>三件神器</h3><div class="resource"><span>抗生素</span><b id="resAntibiotic"></b></div><div class="resource"><span>强光手电</span><b id="resFlashlight"></b></div><div class="resource"><span>防风打火机</span><b>近乎无限</b></div></section>
+          <section class="card compact"><h3>人物关系</h3><div id="affections"></div></section>
+        </aside>
+        <article class="story card"><div id="storyText" class="story-text"></div><div id="options" class="options"></div><form id="actionForm" class="action-box"><label for="actionInput">自由行动</label><div><textarea id="actionInput" rows="2" maxlength="500" placeholder="输入任何合理行动，例如：走进回春堂打听消息……"></textarea><button id="sendBtn" class="primary" type="submit">行动</button></div><small>可点击上方选项，也可自由输入。AI 通常需要数秒生成下一段剧情。</small></form><p id="gameMessage" class="message" role="status"></p></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="quitDialog"><form method="dialog"><h3>离开江湖前</h3><p>本轮尚有未保存的进度。你想保存后退出，还是放弃本次未保存内容？</p><div class="dialog-actions"><button value="cancel" class="ghost">继续游戏</button><button id="discardQuit" value="discard" class="secondary">不保存退出</button><button id="saveQuit" value="save" class="primary">保存并退出</button></div></form></dialog>
+  <div id="busy" class="busy hidden"><div class="spinner"></div><p>江湖正在推演下一步……</p></div>
+  <script src="app.js" type="module"></script>
+</body></html>

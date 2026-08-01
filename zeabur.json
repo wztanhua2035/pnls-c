@@ -1,0 +1,4 @@
+{
+  "build_command": "npm run check",
+  "start_command": "npm start"
+}
