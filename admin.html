@@ -8,8 +8,9 @@
   <form id="gameForm" class="game-form"><input type="hidden" name="id">
     <label>游戏名称<input name="name" maxlength="60" required></label>
     <label class="full">题头图片（16:9，可选，PNG/JPG/WebP，最大4MB）<input id="bannerFile" name="bannerFile" type="file" accept="image/png,image/jpeg,image/webp"><span id="bannerHint" class="field-hint">未上传时使用默认图片</span></label>
-    <label class="full">游戏简介<textarea name="description" rows="3" maxlength="1500" required></textarea></label>
+    <label class="full">游戏背景及前置情节简介（100—150字）<textarea name="description" rows="5" minlength="100" maxlength="150" required></textarea><span class="field-hint">将在游戏简介页完整显示，应说明时代或世界背景、主角处境及故事开始前发生的事件。</span></label>
     <label class="full">主角设定<textarea name="protagonist" rows="4" maxlength="3000" required></textarea></label>
+    <fieldset class="full custom-field-options"><legend>玩家可以自定义的主角元素</legend><label class="radio"><input type="checkbox" name="customFields" value="name"> 姓名</label><label class="radio"><input type="checkbox" name="customFields" value="gender"> 性别</label><label class="radio"><input type="checkbox" name="customFields" value="age"> 年龄</label><label class="radio"><input type="checkbox" name="customFields" value="occupation"> 职业</label><span class="field-hint">未勾选的部分按照主角默认设定；默认设定没有说明时由AI合理生成。</span></fieldset>
     <label class="full">主要NPC设定（可选）<textarea name="npcs" rows="5" maxlength="5000" placeholder="每行一个人物，建议写明姓名、身份、性格和与主线的关系"></textarea></label>
     <label class="full">游戏背景<textarea name="background" rows="7" maxlength="8000" required></textarea></label>
     <label class="full">核心规则和机制<textarea name="rules" rows="7" maxlength="8000" required></textarea><span class="field-hint">系统会自动附加：高自由度、主角视角、前20回合新手豁免、每回合四个选项，以及历史与生活逻辑约束。</span></label>
@@ -17,7 +18,7 @@
   </form>
 </section>
 
-<section id="tab-accounts" class="admin-tab card hidden"><div class="section-title"><div><span class="eyebrow">SAVES</span><h2>玩家存档与时长</h2></div><button id="refreshAdmin" class="secondary">刷新</button></div><div class="table-wrap"><table><thead><tr><th>主角姓名</th><th>游戏</th><th>累计时间</th><th>剧情回合</th><th>最近游戏</th></tr></thead><tbody id="accountRows"></tbody></table></div></section>
+<section id="tab-accounts" class="admin-tab card hidden"><div class="section-title"><div><span class="eyebrow">SAVES</span><h2>玩家存档与时长</h2></div><button id="refreshAdmin" class="secondary">刷新</button></div><div class="table-wrap"><table><thead><tr><th>用户名</th><th>主角姓名</th><th>游戏</th><th>累计时间</th><th>剧情回合</th><th>最近游戏</th></tr></thead><tbody id="accountRows"></tbody></table></div></section>
 <section id="tab-models" class="admin-tab card hidden"><div class="section-title"><div><span class="eyebrow">AI PROVIDERS</span><h2>模型接口管理</h2></div></div><p class="muted">所有游戏共用当前启用的 OpenAI 兼容模型接口，密钥加密保存在服务器。</p><form id="modelForm" class="model-form"><label>配置名称<input name="name" placeholder="例如：主模型" required></label><label>接口根地址<input name="baseUrl" type="url" placeholder="https://api.openai.com/v1" required></label><label>模型名称<input name="model" placeholder="模型 ID" required></label><label>API Key<input name="apiKey" type="password" autocomplete="off" required></label><button class="primary">添加模型</button></form><p id="modelMessage" class="message"></p><div id="modelList" class="model-list"></div></section>
 <section id="tab-security" class="admin-tab card hidden"><span class="eyebrow">SECURITY</span><h2>修改管理密码</h2><form id="passwordForm" class="password-form"><label>当前密码<input name="currentPassword" type="password" required></label><label>新密码（至少8位）<input name="newPassword" type="password" minlength="8" required></label><button class="primary">修改密码</button></form><p id="passwordMessage" class="message"></p></section>
 </section></main><script src="admin.js" type="module"></script></body></html>
