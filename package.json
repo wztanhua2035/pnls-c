@@ -1,8 +1,8 @@
 {
-  "name": "ponan-longshe-mud",
-  "version": "1.1.0",
+  "name": "laiwan-niba-mud-hub",
+  "version": "2.0.0",
   "private": true,
-  "description": "《坡南龙蛇》AI 武侠 MUD 游戏",
+  "description": "“来玩泥巴”多游戏 AI MUD 集合网站",
   "type": "module",
   "engines": { "node": ">=20" },
   "scripts": {

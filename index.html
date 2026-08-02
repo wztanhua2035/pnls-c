@@ -2,37 +2,51 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#e9d8a6"><title>坡南龙蛇｜AI武侠MUD</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="stream.css">
+  <meta name="theme-color" content="#173d35"><title>来玩泥巴｜AI MUD游戏集合</title>
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="hub.css"><link rel="stylesheet" href="stream.css">
 </head>
 <body>
   <main class="page-shell">
-    <header class="hero"><img src="pnlsbanner.png" alt="坡南龙蛇 武侠MUD题头"><p>一梦入宋，龙蛇起陆。你的每一步，都由江湖实时回应。</p></header>
+    <header id="siteHero" class="hero site-hero"><img src="default-banner.svg" alt="来玩泥巴 MUD游戏集合"><p>一方屏幕，万千世界。选择你的故事，马上开玩。</p></header>
 
-    <section id="loginView" class="gate card">
-      <div class="seal">入</div><div><span class="eyebrow">PLAYER ENTRY</span><h1>踏入南宋江湖</h1><p class="muted">姓名与六位数密码共同识别你的个人存档。首次游玩请选择“重新开始”。</p></div>
+    <section id="homeView">
+      <div class="home-title"><div><span class="eyebrow">MUD GAME HALL</span><h1>可玩游戏</h1></div><p class="muted">每个世界都由你的选择实时展开</p></div>
+      <div id="gameList" class="game-list"></div><p id="homeMessage" class="message" role="status"></p>
+      <a class="admin-link home-admin" href="/admin">管理后台</a>
+    </section>
+
+    <section id="detailView" class="hidden">
+      <header class="game-banner"><img id="detailBanner" alt="游戏题头"><button id="detailBack" class="back-float">← 返回首页</button></header>
+      <article class="detail-card card"><span class="eyebrow">GAME INTRODUCTION</span><h1 id="detailName"></h1><p id="detailDescription" class="detail-description"></p><div class="detail-actions"><button id="startGameBtn" class="primary">开始游戏</button><button id="backHomeBtn" class="ghost">返回首页</button></div></article>
+    </section>
+
+    <section id="loginView" class="hidden">
+      <header class="game-banner"><img id="loginBanner" alt="游戏题头"></header>
+      <div class="gate card">
+      <div class="seal">入</div><div><span class="eyebrow">PLAYER ENTRY</span><h1 id="loginTitle">开始游戏</h1><p class="muted">姓名与六位数密码共同识别你的个人存档。首次进入本游戏请选择“重新开始”。</p></div>
       <form id="loginForm" class="form-grid">
-        <label>男主角姓名<input id="playerName" maxlength="20" autocomplete="username" placeholder="例如：尚风" required></label>
+        <label>主角姓名<input id="playerName" maxlength="20" autocomplete="username" placeholder="输入主角姓名" required></label>
         <label>六位数密码<input id="playerPassword" type="password" inputmode="numeric" pattern="\d{6}" maxlength="6" autocomplete="current-password" placeholder="••••••" required></label>
         <fieldset><legend>进入方式</legend><label class="radio"><input type="radio" name="mode" value="continue" checked> 继续游戏</label><label class="radio"><input type="radio" name="mode" value="restart"> 重新开始</label></fieldset>
-        <button class="primary" type="submit">进入江湖</button><p id="loginMessage" class="message" role="status"></p>
-      </form>
-      <a class="admin-link" href="/admin">管理后台</a>
+        <button class="primary" type="submit">进入世界</button><button id="loginBack" class="ghost" type="button">返回游戏介绍</button><p id="loginMessage" class="message" role="status"></p>
+      </form></div>
     </section>
 
     <section id="gameView" class="game hidden" aria-live="polite">
-      <div class="game-top card"><div><span id="chapter" class="eyebrow"></span><h2 id="location"></h2><p id="time" class="muted"></p></div><div class="game-actions"><button id="saveBtn" class="secondary">保存进度</button><button id="quitBtn" class="ghost">退出游戏</button></div></div>
+      <header class="game-banner in-game"><img id="gameBanner" alt="游戏题头"></header>
+      <div class="game-top card"><div><span id="chapter" class="eyebrow"></span><h2 id="location"></h2><p id="time" class="muted"></p></div><div class="game-actions"><button id="saveBtn" class="secondary">保存进度</button><button id="quitBtn" class="ghost">返回首页</button></div></div>
+      <div class="reading-tools card" aria-label="阅读设置"><span>文字</span><div class="size-picker"><button data-size="small">小</button><button data-size="medium" class="active">中</button><button data-size="large">大</button></div><label class="bold-toggle"><input id="boldToggle" type="checkbox"> 加粗</label></div>
       <div class="game-layout">
         <aside class="sidebar">
           <section class="card compact"><h3>人物状态</h3><dl><div><dt>姓名</dt><dd id="statName"></dd></div><div><dt>回合</dt><dd id="statTurn"></dd></div><div><dt>状态</dt><dd id="statHp"></dd></div></dl></section>
-          <section class="card compact"><h3>三件神器</h3><div class="resource"><span>抗生素</span><b id="resAntibiotic"></b></div><div class="resource"><span>强光手电</span><b id="resFlashlight"></b></div><div class="resource"><span>防风打火机</span><b>近乎无限</b></div></section>
-          <section class="card compact"><h3>人物关系</h3><div id="affections"></div></section>
+          <section class="card compact"><h3>随身物品</h3><div id="resources"></div><div id="inventory" class="inventory"></div></section>
+          <section class="card compact"><h3>人物关系</h3><div id="relations"><p class="muted">尚无记录</p></div></section>
         </aside>
-        <article class="story card"><div id="storyText" class="story-text"></div><div id="options" class="options"></div><form id="actionForm" class="action-box"><label for="actionInput">自由行动</label><div><textarea id="actionInput" rows="2" maxlength="500" placeholder="输入任何合理行动，例如：走进回春堂打听消息……"></textarea><button id="sendBtn" class="primary" type="submit">行动</button></div><small>可点击上方选项，也可自由输入。AI 通常需要数秒生成下一段剧情。</small></form><p id="gameMessage" class="message" role="status"></p></article>
+        <article class="story card"><div id="storyText" class="story-text text-medium"></div><div id="options" class="options"></div><form id="actionForm" class="action-box"><label for="actionInput">自由行动</label><div><textarea id="actionInput" rows="2" maxlength="500" placeholder="输入任何符合当前世界设定的行动……"></textarea><button id="sendBtn" class="primary" type="submit">行动</button></div><small>可点击上方选项，也可自由输入。剧情会逐字显示，四个选项将在剧情完成后出现。</small></form><p id="gameMessage" class="message" role="status"></p></article>
       </div>
     </section>
   </main>
-
-  <dialog id="quitDialog"><form method="dialog"><h3>离开江湖前</h3><p>本轮尚有未保存的进度。你想保存后退出，还是放弃本次未保存内容？</p><div class="dialog-actions"><button value="cancel" class="ghost">继续游戏</button><button id="discardQuit" value="discard" class="secondary">不保存退出</button><button id="saveQuit" value="save" class="primary">保存并退出</button></div></form></dialog>
-  <div id="busy" class="busy hidden"><div class="spinner"></div><p>江湖正在推演下一步……</p></div>
+  <dialog id="quitDialog"><form method="dialog"><h3>返回首页前</h3><p>本轮尚有未保存的进度。你想保存后返回，还是放弃这部分进度？</p><div class="dialog-actions"><button value="cancel" class="ghost">继续游戏</button><button id="discardQuit" value="discard" class="secondary">不保存返回</button><button id="saveQuit" value="save" class="primary">保存并返回</button></div></form></dialog>
+  <div id="busy" class="busy hidden"><div class="spinner"></div><p>故事正在推演下一步……</p></div>
   <script src="app.js" type="module"></script>
 </body></html>
