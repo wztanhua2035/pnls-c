@@ -17,19 +17,16 @@
 
     <section id="detailView" class="hidden">
       <header class="game-banner"><img id="detailBanner" alt="游戏题头"><button id="detailBack" class="back-float">← 返回首页</button></header>
-      <article class="detail-card card"><span class="eyebrow">GAME INTRODUCTION</span><h1 id="detailName"></h1><p id="detailDescription" class="detail-description"></p><div class="detail-actions"><button id="startGameBtn" class="primary">开始游戏</button><button id="backHomeBtn" class="ghost">返回首页</button></div></article>
-    </section>
-
-    <section id="loginView" class="hidden">
-      <header class="game-banner"><img id="loginBanner" alt="游戏题头"></header>
-      <div class="gate card">
-      <div class="seal">入</div><div><span class="eyebrow">PLAYER ENTRY · STEP 1</span><h1 id="loginTitle">账号验证</h1><p class="muted">先输入6位用户名和密码；验证后再设置本游戏允许自定义的主角信息。</p></div>
-      <form id="loginForm" class="form-grid">
-        <label>用户名<input id="username" maxlength="6" minlength="6" pattern="[A-Za-z0-9]{6}" autocomplete="username" placeholder="如 mud123" required><span class="field-hint">必须为6位，同时包含英文字母和数字</span></label>
-        <label>密码<input id="playerPassword" type="password" inputmode="numeric" pattern="\d{6}" maxlength="6" minlength="6" autocomplete="current-password" placeholder="6位数字" required></label>
-        <details class="legacy-login"><summary>需要迁移旧版存档？</summary><label>旧版主角姓名<input id="legacyName" maxlength="20" placeholder="仅首次迁移时填写"></label></details>
-        <button class="primary" type="submit">下一步</button><button id="loginBack" class="ghost" type="button">返回游戏介绍</button><p id="loginMessage" class="message" role="status"></p>
-      </form></div>
+      <article class="detail-card card">
+        <span class="eyebrow">GAME INTRODUCTION</span><h1 id="detailName"></h1><p id="detailDescription" class="detail-description"></p>
+        <div class="entry-divider"></div><span class="eyebrow">PLAYER ENTRY · STEP 1</span><h2>账号验证</h2><p class="muted">输入账号和密码后，再设置本游戏允许自定义的主角信息。</p>
+        <form id="loginForm" class="form-grid inline-login">
+          <label>用户名<input id="username" maxlength="6" minlength="6" pattern="[A-Za-z0-9]{6}" autocomplete="username" placeholder="如 mud123" required><span class="field-hint">必须为6位，同时包含英文字母和数字</span></label>
+          <label>密码<input id="playerPassword" type="password" inputmode="numeric" pattern="\d{6}" maxlength="6" minlength="6" autocomplete="current-password" placeholder="6位数字" required></label>
+          <details class="legacy-login"><summary>需要迁移旧版存档？</summary><label>旧版主角姓名<input id="legacyName" maxlength="20" placeholder="仅首次迁移时填写"></label></details>
+          <div class="detail-actions"><button class="primary" type="submit">下一步</button><button id="backHomeBtn" class="ghost" type="button">返回首页</button></div><p id="loginMessage" class="message" role="status"></p>
+        </form>
+      </article>
     </section>
 
     <section id="setupView" class="hidden">
@@ -38,7 +35,7 @@
         <form id="setupForm" class="character-form">
           <fieldset><legend>进入方式</legend><label class="radio"><input id="continueMode" type="radio" name="mode" value="continue"> 继续原有存档</label><label class="radio"><input id="restartMode" type="radio" name="mode" value="restart"> 重新开始</label></fieldset>
           <div id="characterFields" class="character-fields"></div>
-          <div class="setup-actions"><button class="primary" type="submit">确定并进入游戏</button><button id="setupBack" class="ghost" type="button">返回账号验证</button></div><p id="setupMessage" class="message" role="status"></p>
+          <div class="setup-actions"><button class="primary" type="submit">确定并进入游戏</button><button id="setupBack" class="ghost" type="button">返回游戏介绍</button></div><p id="setupMessage" class="message" role="status"></p>
         </form>
       </div>
     </section>
